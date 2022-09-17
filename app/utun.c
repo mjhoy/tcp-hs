@@ -53,11 +53,7 @@ int init_tun() {
         return -1;
     }
 
-    /* tunX device is created, where X is sc.sc_unit - 1. */
-
+    /* utunX device is created, where X is sc.sc_unit - 1. */
+    /* you can see this by running `ifconfig`. */
     return fd;
-}
-
-void close_tun(int fd) {
-    close(fd);
 }
