@@ -19,3 +19,14 @@ $ cabal build
 Linking [executable path]
 $ sudo [executable path]
 ```
+
+Setting up the interface (OSX):
+
+```
+ifconfig # look for the created utun interface
+
+# here `utun8` was the new interface.
+# associate with an ip and ping:
+sudo ifconfig utun8 10.10.10.1 10.10.10.2 up
+ping -c1 10.10.10.2
+```

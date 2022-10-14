@@ -16,6 +16,8 @@ executable tcp-hs
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0
                     , unix ^>=2.8.0.0
+                    , bytestring ^>=0.11.3.1
+                    , network ^>=3.1.2.7
     hs-source-dirs:   app
     c-sources:        app/utun.c
     default-language: Haskell2010
