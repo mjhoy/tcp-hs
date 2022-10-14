@@ -12,25 +12,20 @@ import           Prelude                 hiding ( sin )
 import           System.Posix                   ( closeFd )
 import           System.Posix.Types             ( Fd )
 
-newtype UTun = UTun { fd :: Fd } deriving (Show)
-
 foreign import ccall "init_tun" c_init_tun :: IO CInt
 
-initTun :: IO UTun
+initTun :: IO Fd
 initTun = do
     fd <- throwErrnoIfMinus1 "initTun" c_init_tun
-    pure $ UTun $ fromIntegral fd
-
-closeTun :: UTun -> IO ()
-closeTun (UTun fd) = closeFd $ fromIntegral fd
+    pure $ fromIntegral fd
 
 main :: IO ()
 main = do
-    utun <- initTun
-    putStrLn $ "Got utun! " ++ show utun
+    fd <- initTun
+    putStrLn $ "Got utun! " ++ show fd
 
     putStrLn "Hit newline to finish"
     _ <- getLine
 
-    closeTun utun
+    closeFd fd
     putStrLn "Closed fd!"
